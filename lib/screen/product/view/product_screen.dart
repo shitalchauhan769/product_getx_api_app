@@ -16,7 +16,7 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
 ProductModel product=Get.arguments;
-HeroController controller=Get.find();
+HomeController controller = Get.put(HomeController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +80,8 @@ HeroController controller=Get.find();
             child: InkWell(
               onTap: () {
 
-
+               controller.cartList.add(product);
+               Get.back();
               },
               child: Align(alignment: Alignment.bottomCenter,
                 child: Card(

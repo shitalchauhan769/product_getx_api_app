@@ -50,7 +50,8 @@ class _HomeScreenState extends State<HomeScreen> {
               print(model);
               if (model == null) {
               return  const Text("Not Data");
-              } else {
+              }
+              else {
               return  GridView.builder(
                   itemCount:model.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -90,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       fontWeight: FontWeight.bold),overflow: TextOverflow.ellipsis,
                                 ),
                                  Text(
-                                  "${model[index].price}",
+                                  "\$ ${model[index].price}",
                                   style: const TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.bold,
@@ -98,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Text(
                                   "${model[index].category}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 15,
                                   ),
                                 ),
@@ -112,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               }
             }
-            return Center(child: Text("new"));
+            return Center(child: const CircularProgressIndicator());
           },
 
         ),
