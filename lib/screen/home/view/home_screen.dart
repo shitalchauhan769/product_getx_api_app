@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     alignment: Alignment.center,
                                   ),
                                 ),
-                                SizedBox(height: 20,),
+                                const SizedBox(height: 20,),
                                 Text(
                                   "${model[index].title}",
                                   style: const TextStyle(

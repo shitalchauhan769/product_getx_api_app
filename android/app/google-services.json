@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "122677649342",
+    "project_id": "exam-f2ddf",
+    "storage_bucket": "exam-f2ddf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:122677649342:android:2108021a005695bca263ef",
+        "android_client_info": {
+          "package_name": "com.product.store_api"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGS51NdSbwxnL0H5RWpi0LYjTCcE86RVA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -79,8 +79,7 @@ HomeController controller = Get.put(HomeController());
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
               onTap: () {
-
-               controller.cartList.add(product);
+                controller.cartList.add(product);
                Get.back();
               },
               child: Align(alignment: Alignment.bottomCenter,

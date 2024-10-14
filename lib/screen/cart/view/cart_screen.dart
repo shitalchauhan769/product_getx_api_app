@@ -83,10 +83,10 @@ class _CartScreenState extends State<CartScreen> {
                                     onPressed: () {},
                                     icon: const Icon(Icons.add,size: 15,),
                                   ),
-                                  Text("0",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+                                  const Text("0",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
                                   IconButton(
                                     onPressed: () {
-                                      // controller.cartList.remove(index);
+                                      controller.cartList.remove(index);
 
                                     },
                                     icon: const Icon(Icons.remove,size: 15,),
