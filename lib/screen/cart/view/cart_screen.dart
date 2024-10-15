@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:store_api/screen/cart/controller/cart_controller.dart';
+import 'package:store_api/utils/helper/product_db_helper.dart';
 
 import '../../home/cantroller/home_controller.dart';
 
@@ -16,6 +18,12 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
 // HeroController controller =Get.find();
   HomeController controller = Get.put(HomeController());
+  CartController controller1 = Get.put(CartController());
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +37,7 @@ class _CartScreenState extends State<CartScreen> {
           return Obx( ()=> Column(
               children: [
                 Container(
-                  height: 120,
+                  height: 150,
                   width: MediaQuery.sizeOf(context).width*150,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -66,33 +74,42 @@ class _CartScreenState extends State<CartScreen> {
                         Spacer(),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          child: Row(
                             children: [
-                              Text(
-                                "\$ ${controller.cartList[index].price}",
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.orange,
-                                    fontSize: 18),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Row(
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  IconButton(
-                                    onPressed: () {},
-                                    icon: const Icon(Icons.add,size: 15,),
+                                  Text(
+                                    "\$ ${controller.cartList[index].price}",
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.orange,
+                                        fontSize: 18),
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  const Text("0",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
-                                  IconButton(
-                                    onPressed: () {
-                                      controller.cartList.remove(index);
+                                  Row(
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {},
+                                        icon: const Icon(Icons.add,size: 15,),
+                                      ),
+                                      const Text("0",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),),
+                                      IconButton(
+                                        onPressed: () {
+                                          // controller.cartList.remove(index);
 
-                                    },
-                                    icon: const Icon(Icons.remove,size: 15,),
+                                        },
+                                        icon: const Icon(Icons.remove,size: 15,),
+                                      ),
+                                    ],
                                   ),
+                                  IconButton(onPressed: () {
+                                    DBHelper.helper.delete(id:controller.cartList[index].id!);
+
+                                  }, icon: const Icon(Icons.delete),),
+
                                 ],
-                              )
+                              ),
                             ],
                           ),
                         ),

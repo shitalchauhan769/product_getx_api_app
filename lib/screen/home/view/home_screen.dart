@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:store_api/screen/cart/model/cart_model.dart';
 import 'package:store_api/screen/home/cantroller/home_controller.dart';
 import 'package:store_api/screen/home/model/home_model.dart';
+
+import '../../../utils/helper/product_db_helper.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -62,6 +65,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         Get.toNamed("/product",arguments: model[index]);
                       },
                       child: Container(
+                        // height: MediaQuery.sizeOf(context).height * 0.50,
+                        // width:MediaQuery.sizeOf(context).width * 0.30,
                         height: 250,
                         width: 250,
                         child: Card(
@@ -69,42 +74,69 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Center(
-                                  child: CachedNetworkImage(
-                                    placeholder: (context, url) =>
-                                        const CircularProgressIndicator(),
-                                    imageUrl: "${model[index].image}",width: 100,height: 100,
-                                    errorWidget: (context, url, error) =>
-                                        const FlutterLogo(
-                                      size: 120,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Center(
+                                      child: CachedNetworkImage(
+                                        placeholder: (context, url) =>
+                                            const CircularProgressIndicator(),
+                                        imageUrl: "${model[index].image}",width: 100,height: 100,
+                                        errorWidget: (context, url, error) =>
+                                            const FlutterLogo(
+                                          size: 120,
+                                        ),
+                                        alignment: Alignment.center,
+                                      ),
                                     ),
-                                    alignment: Alignment.center,
-                                  ),
+                                    const SizedBox(height: 20,),
+                                    Text(
+                                      "${model[index].title}",
+                                      style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold),overflow: TextOverflow.ellipsis,
+                                    ),
+                                     Text(
+                                      "\$ ${model[index].price}",
+                                      style: const TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.orange),
+                                    ),
+                                    Text(
+                                      "${model[index].category}",
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Row(
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {
+                                              CartModel p1 = CartModel(
+                                                  id: model[index].id,
+                                                  image: model[index].image,
+                                                  category: model[index].category,
+                                                  description: model[index].description,
+                                                  price: model[index].price,
+                                                  title: model[index].title);
+                                              DBHelper.helper.insertDb(p1);
+                                              controller.getAPIData();
+                                      
+                                      
+                                            },
+                                            icon: const Icon(
+                                              Icons.favorite,
+                                              color: Colors.grey,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    )
+                                  ],
                                 ),
-                                const SizedBox(height: 20,),
-                                Text(
-                                  "${model[index].title}",
-                                  style: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold),overflow: TextOverflow.ellipsis,
-                                ),
-                                 Text(
-                                  "\$ ${model[index].price}",
-                                  style: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.orange),
-                                ),
-                                Text(
-                                  "${model[index].category}",
-                                  style: const TextStyle(
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ],
-                            ),
+
+
                           ),
                         ),
                       ),
